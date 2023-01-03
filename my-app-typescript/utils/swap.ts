@@ -13,7 +13,7 @@ import {
 export const getAmountOfTokensReceivedFromSwap = async (
   _swapAmountWei: BigNumber,
   provider: providers.Web3Provider,
-  ethSelected: BigNumber,
+  ethSelected: boolean,
   ethBalance: BigNumber,
   reservedCD: BigNumber
 ) => {
@@ -54,7 +54,7 @@ export const swapTokens = async (
   signer: providers.JsonRpcSigner,
   swapAmountWei: BigNumber,
   tokenToBeReceivedAfterSwap: BigNumber,
-  ethSelected: BigNumber
+  ethSelected: boolean
 ) => {
   // Create a new instance of the exchange contract
   const exchangeContract = new Contract(
