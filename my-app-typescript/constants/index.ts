@@ -1,3 +1,5 @@
+import { providers } from 'ethers';
+
 export const TOKEN_CONTRACT_ABI = [
   {
     inputs: [
