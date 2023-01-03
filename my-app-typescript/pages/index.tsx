@@ -42,7 +42,7 @@ export default function Home() {
   const [lpBalance, setLPBalance] = useState(zero);
   /** Variables to keep track of liquidity to be added or removed */
   // addEther is the amount of Ether that the user wants to add to the liquidity
-  const [addEther, setAddEther] = useState(zero);
+  const [addEther, setAddEther] = useState('0');
   // addCDTokens keeps track of the amount of CD tokens that the user wants to add to the liquidity
   // in case when there is no initial liquidity and after liquidity gets added it keeps track of the
   // CD tokens that the user can add given a certain amount of ether
@@ -184,7 +184,7 @@ export default function Home() {
   const _addLiquidity = async () => {
     try {
       // Convert the ether amount entered by the user to Bignumber
-      const addEtherWei = utils.parseEther(addEther.toString());
+      const addEtherWei = utils.parseEther(addEther);
       // Check if the values are zero
       if (!addCDTokens.eq(zero) && !addEtherWei.eq(zero)) {
         const signer = (await getProviderOrSigner(
@@ -378,11 +378,7 @@ export default function Home() {
                 <input
                   type='number'
                   placeholder='Amount of Ether'
-                  onChange={e =>
-                    setAddEther(
-                      BigNumber.from(utils.parseEther(e.target.value || '0'))
-                    )
-                  }
+                  onChange={e => setAddEther(e.target.value || '0')}
                   className={styles.input}
                 />
                 <input
@@ -405,9 +401,7 @@ export default function Home() {
                   type='number'
                   placeholder='Amount of Ether'
                   onChange={async e => {
-                    setAddEther(
-                      BigNumber.from(utils.parseEther(e.target.value || '0'))
-                    );
+                    setAddEther(e.target.value || '0');
                     // calculate the number of CD tokens that
                     // can be added given  `e.target.value` amount of Eth
                     const _addCDTokens = await calculateCD(
