@@ -379,7 +379,9 @@ export default function Home() {
                   type='number'
                   placeholder='Amount of Ether'
                   onChange={e =>
-                    setAddEther(BigNumber.from(e.target.value || '0'))
+                    setAddEther(
+                      BigNumber.from(utils.parseEther(e.target.value || '0'))
+                    )
                   }
                   className={styles.input}
                 />
@@ -403,7 +405,9 @@ export default function Home() {
                   type='number'
                   placeholder='Amount of Ether'
                   onChange={async e => {
-                    setAddEther(BigNumber.from(e.target.value || '0'));
+                    setAddEther(
+                      BigNumber.from(utils.parseEther(e.target.value || '0'))
+                    );
                     // calculate the number of CD tokens that
                     // can be added given  `e.target.value` amount of Eth
                     const _addCDTokens = await calculateCD(
